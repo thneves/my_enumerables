@@ -116,8 +116,6 @@ describe Enumerable do
     end
   end
 
-  # WORK LATER IN THIS METHOD
-
   describe '#my_count' do
     context 'return the number of items in the argument given' do
       it { expect(array.my_count).to eql(5) }
