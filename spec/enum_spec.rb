@@ -5,7 +5,7 @@ require_relative '../enumarable.rb'
 describe Enumerable do
   let(:array) { [1, 2, 3, 4, 5] }
   let(:array_mix) { [1, '2', 3, true] }
-  let(:string) { %w[surf skate run] }
+  let(:string) { %w[surf skate run skate] }
   let(:hash) { { 'one' => 1, 'two' => 2, 'three' => 3 } }
   let(:range) { (1..4) }
 
@@ -92,6 +92,36 @@ describe Enumerable do
       expect(range.my_any?).to eql(true)
     end
   end
+
+  describe '#my_none?' do
+    it 'return true if none of the items are strings' do
+      expect(array.my_none?(String)).to eql(true)
+    end
+
+    it 'returns false if one of the items are strings' do
+      expect(string.my_none?(String)).to eql(false)
+    end
+  end
+
+  # WORK LATER IN THIS METHOD
+
+  describe '#my_count' do
+    context 'return the number of items in the argument given' do
+      it { expect(array.my_count).to eql(5) }
+      it { expect(array.my_count).to eql(array.count) }
+      it { expect(array_mix.my_count).to eql(4) }
+      it { expect(string.my_count).to eql(4) }
+    end
+
+    it 'returns 0 when item not found' do
+      expect(string.count('football')).to eql(0)
+    end
+
+    it 'return the number of items found' do
+      expect(string.count('skate')).to eql(2)
+    end
+  end
+
 end
 
 # rubocop:enable Layout/LineLength
