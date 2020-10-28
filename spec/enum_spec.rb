@@ -74,6 +74,24 @@ describe Enumerable do
       it { expect(range.my_all?).to eql(true)}
     end
   end
+
+  describe '#my_any?' do
+    it 'return true if at least one item is a number' do
+      expect(array_mix.my_any?(Numeric)).to eql(array_mix.any?(Numeric))
+    end
+
+    it 'return false if none of the items is a number' do
+      expect(string.my_any?(Numeric)).to eql(false)
+    end
+
+    it 'return true if at least one item is a string' do
+      expect(array_mix.my_any?(String)).to eql(true)
+    end
+
+    it 'returns true if no block is given' do
+      expect(range.my_any?).to eql(true)
+    end
+  end
 end
 
 # rubocop:enable Layout/LineLength
