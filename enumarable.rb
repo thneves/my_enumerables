@@ -2,6 +2,9 @@
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Style/RedundantSelf
+# rubocop:disable Style/Documentation
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
 
 module Enumerable
   def my_each
@@ -59,7 +62,7 @@ module Enumerable
   def my_any?(arg = nil)
     if block_given?
       my_each { |element| return true if yield(element) }
-    elsif !arg.nil? and arg.is_a?(Class)
+    elsif !arg.nil? && arg.is_a?(Class)
       my_each { |element| return true if [element.class, element.class.superclass].include?(arg) }
     elsif arg.nil?
       my_each { |element| return true if element }
@@ -140,3 +143,6 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Style/RedundantSelf
+# rubocop:enable Style/Documentation
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength
