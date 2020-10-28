@@ -102,6 +102,18 @@ describe Enumerable do
     it 'returns false if one of the items are strings' do
       expect(sports.my_none?(String)).to eql(false)
     end
+
+    it 'returns true when nil' do
+      expect([nil].my_none?).to eql(true)
+    end
+
+    it 'return false when one item is true' do
+      expect([nil, false, true].my_none?).to eql(false)
+    end
+
+    it 'return true to empty array' do
+      expect([].my_none?).to eql(true)
+    end
   end
 
   # WORK LATER IN THIS METHOD

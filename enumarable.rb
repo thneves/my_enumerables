@@ -53,7 +53,7 @@ module Enumerable
     if block_given?
       my_each { |element| return false if yield(element) == false }
       true
-    elsif !arg.nil? and arg.is_a?(Class)
+    elsif !arg.nil? && arg.is_a?(Class)
       my_each { |element| return false unless [element.class, element.class.superclass].include?(arg) }
     elsif arg.nil?
       my_each { |element| return false if element.nil? || element == false }
