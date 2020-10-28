@@ -69,9 +69,9 @@ describe Enumerable do
     end
 
     context 'returns true if no block is given' do
-      it { expect(array.my_all?).to eql(true)}
-      it { expect(hash.my_all?).to eql(true)}
-      it { expect(range.my_all?).to eql(true)}
+      it { expect(array.my_all?).to eql(true) }
+      it { expect(hash.my_all?).to eql(true) }
+      it { expect(range.my_all?).to eql(true) }
     end
   end
 
@@ -119,6 +119,23 @@ describe Enumerable do
 
     it 'return the number of items found' do
       expect(string.count('skate')).to eql(2)
+    end
+  end
+
+  describe '#my_map' do
+    context 'returns numbers doubled' do
+      it { expect(array.my_map { |n| n * 2 }).to eql(array.map { |n| n * 2 }) }
+      it { expect(array.my_map { |n| n * 2 }).to eql([2, 4, 6, 8, 10]) }
+    end
+
+    context 'add text to string' do
+      it { expect(string.my_map { |word| "I love #{word}"}).to eql(string.map { |word| "I love #{word}"}) }
+    end
+
+    context 'return to_enum(Enumator) if no block is given' do
+      it { expect(range.my_map).to be_an(Enumerator) }
+      it { expect(array.my_map).to be_an(Enumerator) }
+      it { expect(hash.my_map).to be_an(Enumerator) }
     end
   end
 
