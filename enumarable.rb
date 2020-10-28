@@ -38,9 +38,15 @@ module Enumerable
   def my_select
     return to_enum(:my_select) unless block_given?
 
-    arr = []
-    my_each { |element| arr.push(element) if yield(element) }
-    arr
+    if self.class == Array || self.class == Range
+      arr = []
+      my_each { |element| arr.push(element) if yield(element) }
+      arr
+    elsif self.class == Hash
+      hash = {}
+      my_each { |element, value| hash[element] = value if yield(element) }
+      hash
+    end
   end
 
   def my_all?(arg = nil)
