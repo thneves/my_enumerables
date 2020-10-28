@@ -4,6 +4,7 @@ require_relative '../enumarable.rb'
 
 describe Enumerable do
   let(:array) { [1, 2, 3, 4, 5] }
+  let(:array_mix) { [1, '2', 3, true] }
   let(:string) { %w[surf skate run] }
   let(:hash) { { 'one' => 1, 'two' => 2, 'three' => 3 } }
   let(:range) { (1..4) }
@@ -33,6 +34,44 @@ describe Enumerable do
       it { expect(range.my_each_with_index).to be_an(Enumerator) }
       it { expect(array.my_each_with_index).to be_an(Enumerator) }
       it { expect(hash.my_each_with_index).to be_an(Enumerator) }
+    end
+  end
+
+  describe '#my_select' do
+    context 'returns only numbers bigger than 2' do
+      it { expect(array.my_select { |n| n > 2 }).to eql(array.select { |n| n > 2 }) }
+      it { expect(range.my_select { |n| n > 2 }).to eql(range.select { |n| n > 2 }) }
+      # it { expect(hash.my_select { |n, v| v > 2 }).to eql(hash.select { |n, v| v > 2 }) } LATER
+    end
+
+    context 'return to_enum(Enumator) if no block is given' do
+      it { expect(range.my_select).to be_an(Enumerator) }
+      it { expect(array.my_select).to be_an(Enumerator) }
+      it { expect(hash.my_select).to be_an(Enumerator) }
+    end
+  end
+
+  describe '#my_all' do
+    it 'returns true if all elements are numbers' do
+      expect(array.my_all?(Numeric)).to eql(true)
+    end
+
+    it 'returns false if not all elements are numbers' do
+      expect(array_mix.my_all?(Numeric)).to eql(false)
+    end
+
+    it 'returns true if all elements are strings' do
+      expect(string.my_all?(String)).to eql(string.all?(String))
+    end
+
+    it 'returns false if not all elements are string' do
+      expect(array_mix.my_all?(String)).to eql(false)
+    end
+
+    context 'returns true if no block is given' do
+      it { expect(array.my_all?).to eql(true)}
+      it { expect(hash.my_all?).to eql(true)}
+      it { expect(range.my_all?).to eql(true)}
     end
   end
 end
