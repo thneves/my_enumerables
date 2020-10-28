@@ -39,14 +39,12 @@ Download the code or copy the git repository to your computer.
 ### Usage
 To run our project type 'ruby enumerable.rb' in your terminal where your file is stored.
 
+### Tests
+- To create tests open the directory folder and run 'rspec' in the terminal.
+- You can also create different tests situations altering the tests in the enum_spec.rb file
+
 
 ## Authors
-
-👤 **Steven Jack Chung**
-
-- GitHub: [@jcy2704](https://github.com/jcy2704)
-- Twitter: [@yiak_](https://twitter.com/yiak_)
-- LinkedIn: [Steven Jack Chung](https://linkedin.com/in/stevenjchung)
 
 👤 **Thales Neves**
 
