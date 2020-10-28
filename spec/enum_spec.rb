@@ -139,6 +139,25 @@ describe Enumerable do
     end
   end
 
+  describe '#my_inject' do
+    context 'returns the sum of all values' do
+      it { expect(array.my_inject(:+)).to eql(15) }
+      it { expect(range.my_inject(:+)).to eql(10) }
+      it { expect(array.my_inject { |sum, num| sum + num}).to eql(15) }
+    end
+
+    context 'returns the multiplication of all values' do
+      it { expect(array.my_inject(:*)).to eql(120) }
+      it { expect(range.my_inject(:*)).to eql(24) }
+      it { expect(array.my_inject(10, :*)).to eql(1200)}
+      it { expect(array.my_inject(10) { |product, num| product * num}).to eql(1200)}
+    end
+
+    it 'find the longest word' do
+      expect(string.my_inject { |memo, word| memo.length > word.length ? memo : word }).to eql('skate')
+    end
+  end
+
 end
 
 # rubocop:enable Layout/LineLength
