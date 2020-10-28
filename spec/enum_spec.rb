@@ -1,5 +1,3 @@
-# rubocop:disable Layout/LineLength
-
 require_relative '../enumarable.rb'
 
 describe Enumerable do
@@ -25,9 +23,26 @@ describe Enumerable do
 
   describe '#my_each_with_index' do
     context 'iteration through item and index of argument given' do
-      it { expect(array.my_each_with_index { |item, index| puts "#{item}, index #{index}" }).to eql(array.my_each_with_index { |item, index| puts "#{item}, index #{index}" }) }
-      it { expect(range.my_each_with_index { |item, index| puts "#{item}, index #{index}" }).to eql(range.my_each_with_index { |item, index| puts "#{item}, index #{index}" }) }
-      it { expect(hash.my_each_with_index { |item, index| puts "#{item}, index #{index}" }).to eql(hash.my_each_with_index { |item, index| puts "#{item}, index #{index}" }) }
+      it {
+        expect do
+          array.my_each_with_index { |item, index| puts "#{item}, index #{index}" }.to
+          eql(array.each_with_index { |item, index| puts "#{item}, index #{index}" })
+        end
+      }
+
+      it {
+        expect do
+          range.my_each_with_index { |item, index| puts "#{item}, index #{index}" }.to
+          eql(range.each_with_index { |item, index| puts "#{item}, index #{index}" })
+        end
+      }
+
+      it {
+        expect do
+          hash.my_each_with_index { |item, index| puts "#{item}, index #{index}" }.to
+          eql(hash.each_with_index { |item, index| puts "#{item}, index #{index}" })
+        end
+      }
     end
 
     context 'return to_enum(Enumator) if no block is given' do
@@ -174,5 +189,3 @@ describe Enumerable do
     end
   end
 end
-
-# rubocop:enable Layout/LineLength
